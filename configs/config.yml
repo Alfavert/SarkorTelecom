@@ -1,0 +1,8 @@
+port: "8000"
+db:
+  username: "postgres"
+  password: "secret"
+  host: "localhost"
+  port: "5432"
+  DBName: "SarkorTest"
+  SSLMode: "disable"
