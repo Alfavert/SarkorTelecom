@@ -1,1 +1,1 @@
-DROP database IF EXISTS sarkortest;
+drop table if exists product;

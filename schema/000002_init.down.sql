@@ -1,1 +1,1 @@
-drop table if exists product;
+DELETE FROM product WHERE id = 1;
