@@ -7,13 +7,12 @@
 6) Запустить файлы миграции командой
 migrate -database "postgres://username:password@localhost:port/sarkortest?sslmode=disable" -path ./schema up
 7) Запустить cmd/main.go файл
-8) Проверку API осуществлял через Postman (
-   POST "/products" - добавляет запись в таблицу, возвращает id записи
-   GET "/product" - указываете id, возвращает информацию о продукте
-   PUT "/product" - указываете id, обновляет содержимое
-   DELETE "/product" - указываете id, удаляет указанный продукт
-   GET "/products" -  возвращает список всего содержимого таблицы в БД 
-)
+8) Проверку API осуществлял через Postman
+- POST "/products" - добавляет запись в таблицу, возвращает id записи
+- GET "/product" - указываете id, возвращает информацию о продукте
+- PUT "/product" - указываете id, обновляет содержимое
+- DELETE "/product" - указываете id, удаляет указанный продукт
+- GET "/products" -  возвращает список всего содержимого таблицы в БД 
 
 
 Использовал в проекте - Gin - github.com/gin-gonic/gin, 
