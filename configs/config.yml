@@ -3,6 +3,6 @@ db:
   username: "postgres"
   password: "secret"
   host: "localhost"
-  port: "5432"
-  DBName: "SarkorTest"
+  port: "5444"
+  DBName: "sarkortest"
   SSLMode: "disable"
