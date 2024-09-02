@@ -26,3 +26,8 @@ migrate -database "postgres://username:password@localhost:port/sarkortest?sslmod
   logrus - github.com/sirupsen/logrus, 
   viper - github.com/spf13/viper,
   golang-migrate
+Для написания unit test's было использовано:
+-	github.com/stretchr/testify/assert
+- github.com/stretchr/testify/require
+- github.com/zhashkevych/go-sqlxmock
+- github.com/golang/mock/gomock
