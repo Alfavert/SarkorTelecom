@@ -1,0 +1,34 @@
+services:
+  sarkortelecom:
+    build: ./
+    command: ./wait-for-postgres.sh db ./SarkorTelecom
+    ports:
+    - 8000:8000
+    depends_on:
+    - db
+    environment:
+    - DB_PASSWORD=secret
+
+
+  db:
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_PASSWORD=secret
+    ports:
+      - 5432:5432
+
+  migrate:
+    image: migrate/migrate:latest
+    command: [
+      "-path", "/migrations",
+      "-database", "postgres://postgres:secret@db:5432/sarkortest?sslmode=disable",
+      "up"
+    ]
+    volumes:
+      - ./schema:/migrations
+    depends_on:
+      - db
