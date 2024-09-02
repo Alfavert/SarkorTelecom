@@ -1,4 +1,4 @@
-package api
+package handler
 
 import (
 	"SarkorTelekom/pkg/repository"
@@ -11,13 +11,13 @@ import (
 func (h *Handler) CreateProduct(c *gin.Context) {
 	var input repository.Products
 	if err := c.BindJSON(&input); err != nil {
-		logrus.Error(c, http.StatusBadRequest, err.Error())
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
 		return
 	}
 
 	id, err := h.services.CreateProduct(input)
 	if err != nil {
-		logrus.Error(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -26,20 +26,21 @@ func (h *Handler) CreateProduct(c *gin.Context) {
 	})
 }
 func (h *Handler) updateProduct(c *gin.Context) {
-	id, err := strconv.Atoi(c.Request.URL.Query().Get("id"))
+	idStr := c.Request.URL.Query().Get("id")
+	id, err := strconv.Atoi(idStr)
 	if err != nil {
-		logrus.Error(c, http.StatusBadRequest, "invalid id param")
+		newErrorResponse(c, http.StatusBadRequest, "invalid id")
 		return
 	}
 
 	var input repository.UpdateProducts
 	if err := c.BindJSON(&input); err != nil {
-		logrus.Error(c, http.StatusBadRequest, err.Error())
+		newErrorResponse(c, http.StatusBadRequest, "invalid input body")
 		return
 	}
 
 	if err := h.services.Update(id, input); err != nil {
-		logrus.Error(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -55,7 +56,7 @@ func (h *Handler) deleteProduct(c *gin.Context) {
 
 	err = h.services.Delete(itemId)
 	if err != nil {
-		logrus.Error(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -65,13 +66,13 @@ func (h *Handler) getProduct(c *gin.Context) {
 	itemId, err := strconv.Atoi(c.Request.URL.Query().Get("id"))
 
 	if err != nil {
-		logrus.Error(c, http.StatusBadRequest, "invalid id param")
+		newErrorResponse(c, http.StatusBadRequest, "invalid id")
 		return
 	}
 
 	item, err := h.services.GetById(itemId)
 	if err != nil {
-		logrus.Error(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
@@ -80,7 +81,7 @@ func (h *Handler) getProduct(c *gin.Context) {
 func (h *Handler) getProducts(c *gin.Context) {
 	items, err := h.services.GetAll()
 	if err != nil {
-		logrus.Error(c, http.StatusInternalServerError, err.Error())
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 

@@ -4,6 +4,7 @@ import (
 	"SarkorTelekom/pkg/repository"
 )
 
+//go:generate mockgen -source=service.go -destination=mocks/mock.go
 type Product interface {
 	CreateProduct(products repository.Products) (int, error)
 	GetById(productId int) (repository.Products, error)
