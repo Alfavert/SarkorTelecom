@@ -1,4 +1,5 @@
-# SarkorTelekom
+# Тестовое задание для SarkorTelecom на позицию Junior разработчика
+тестовое - https://disk.yandex.ru/i/6v-8xGiG6_tQ0A
 1) Скачать репозиторий
 2) В консоли перейти в директорию в которую вы скачали репозиторий
 3) Запустить команду docker-compose up --build sarkortelecom
